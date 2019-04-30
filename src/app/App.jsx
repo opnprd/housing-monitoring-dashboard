@@ -5,6 +5,7 @@ import { Map } from '../map/Map.js';
 
 import BaseInfo from './BaseInfo.jsx';
 import PropertyCount from '../inferencers/propertyCount/View.jsx';
+import EventStream from '../visualisers/eventStream/View.jsx'
 
 import { getEventsForScheme } from '../resources/events';
 
@@ -36,6 +37,7 @@ class App extends Component {
       schemeDisplay = <>
         <div className='col-6'><BaseInfo schemeId={schemeId} events={events}/></div>
         <div className='col-6'><PropertyCount schemeId={schemeId} events={events}/></div>
+        <div className='col-12'><EventStream events={events} /></div>
       </>;
     }
 

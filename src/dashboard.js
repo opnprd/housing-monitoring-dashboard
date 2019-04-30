@@ -1,13 +1,4 @@
 import './style/style.scss';
-import { render } from 'react-dom';
 
-import App from './app/App.js';
+import './app/App.jsx';
 
-const app = new App();
-
-render(
-  app.render(),
-  document.getElementById('root')
-)
-
-app.map.init();

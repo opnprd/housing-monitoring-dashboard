@@ -2,14 +2,21 @@ import L from 'leaflet-providers';
 import { getSchemesInArea } from '../resources/schemes';
 import { boundsToPolygon } from './helpers';
 
-import { Component } from 'react';
-
 export class Map {
+  constructor(app) {
+    this.app = app;
+  }
+
   init() {
     this.map = L.map('map').setView([53.80, -1.55], 15);
     L.tileLayer.provider('Stamen.TonerLite').addTo(this.map);
     this.addSchemesLayer();
     this.map.on('moveend', () => this.addSchemesLayer());
+  }
+
+  setSelected(schemeId) {
+    this.app.setSelected(schemeId);
+    console.log(this.app.state);
   }
 
   async addSchemesLayer() {
@@ -23,10 +30,10 @@ export class Map {
     this.schemesLayer = L.geoJSON(schemeGeoJson, {
       style: function () {
         return { color: 'green' };
-      }
-    })
-    .bindPopup(function (layer) {
-      return JSON.stringify(layer.feature.properties, null, 2);
+      },
+      onEachFeature: (feature, layer) => {
+        layer.on('click', () => this.setSelected(feature.properties.schemeId));
+      },
     })
     .addTo(this.map);
   }

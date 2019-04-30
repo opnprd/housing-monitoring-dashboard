@@ -2,18 +2,9 @@ import L from 'leaflet-providers';
 import { getSchemesInArea } from '../resources/schemes';
 import { boundsToPolygon } from './helpers';
 
-import { Component, createElement } from 'react';
+import { Component } from 'react';
 
-export class Map extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    const div = createElement('div', { id: 'map'} );
-    return div;
-  }
-
+export class Map {
   init() {
     this.map = L.map('map').setView([53.80, -1.55], 15);
     L.tileLayer.provider('Stamen.TonerLite').addTo(this.map);

@@ -1,6 +1,6 @@
 import { Component } from 'react';
 
-import { Map } from '../map';
+import { Map } from '../map/Map.js';
 
 export default class App extends Component {
   constructor(props) {
@@ -9,7 +9,6 @@ export default class App extends Component {
   }
 
   render() {
-    return this.map.render();
+    return <div id='map'/>;
   }
 }
-

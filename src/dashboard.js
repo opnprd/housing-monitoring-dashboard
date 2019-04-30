@@ -1,14 +1,13 @@
 import './style/style.scss';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
 
-import App from './app';
+import App from './app/App.js';
 
 const app = new App();
 
-ReactDOM.render(
+render(
   app.render(),
   document.getElementById('root')
 )
 
 app.map.init();
-

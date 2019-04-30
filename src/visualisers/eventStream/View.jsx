@@ -1,30 +1,41 @@
+import ret from 'react-event-timeline';
+
 function unCamelCase(text) {
   return text.replace( /([A-Z])/g, " $1" )
     .trim()
     .replace(/[a-z]/, (char) => char.toUpperCase());
 }
 
-function sortEvents(events) {
-  return events
-    .filter(x => x.date)
-    .sort((x, y) => {
-      if (x.date === y.date) return 0;
-      return (x.date < y.date) ? -1 : 1;
-    });
+function sortEventsByDate(a, b) {
+  if (a.date === b.date) return 0;
+  return (a.date < b.date) ? -1 : 1;
 }
 
-function Event(props) {
-  const { event } = props;
+function TimedEvents(props) {
+  const { events } = props;
+
+  const timelineEvents = events
+    .filter(x => x.date)
+    .sort(sortEventsByDate)
+    .map(x => (
+      <ret.TimelineEvent  title={unCamelCase(x.type)}
+                          createdAt={x.date} 
+                          key={x.eventId}>
+      </ret.TimelineEvent>
+    ));
+
   return (
-    <div className='event'>
-      { unCamelCase(event.type) } captured on { event.date }
-    </div>
+    <ret.Timeline>
+    { timelineEvents }
+    </ret.Timeline>
   );
 }
 
 function UndatedEvents(props) {
   const { events } = props;
-  const undatedEvents = events.filter(x => !x.date).map(x => <UndatedEvent event={x} />);
+  const undatedEvents = events
+    .filter(x => !x.date)
+    .map(x => <UndatedEvent event={x} key={x.eventId} />);
   if (undatedEvents.length === 0) return null;
   return (
     <>
@@ -45,12 +56,15 @@ function UndatedEvent(props) {
 
 export default function EventStream(props) {
   const events = props.events;
-  const datedEvents = sortEvents(props.events).map(x => <Event event={x} />);
   return (
     <>
       <h2>Event stream</h2>
-      { datedEvents }
-      <UndatedEvents events={events} />
+      <div className='col-6'>
+        <TimedEvents events={events} />
+      </div>
+      <div className='col-6'>
+        <UndatedEvents events={events} />
+      </div>
     </>
   );
 }

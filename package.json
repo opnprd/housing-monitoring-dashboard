@@ -28,7 +28,8 @@
     "leaflet": "1.4.0",
     "leaflet-providers": "1.6.0",
     "react": "16.8.6",
-    "react-dom": "16.8.6"
+    "react-dom": "16.8.6",
+    "react-event-timeline": "1.6.3"
   },
   "browserslist": "> 5%, not dead"
 }

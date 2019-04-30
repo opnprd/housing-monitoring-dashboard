@@ -31,7 +31,10 @@ export class Map {
         return { color: 'green' };
       },
       onEachFeature: (feature, layer) => {
-        layer.on('click', () => this.setSelected(feature.properties.schemeId));
+        layer.on('click', () => {
+          this.map.fitBounds(layer.getBounds(), {});
+          this.setSelected(feature.properties.schemeId);
+        });
       },
     })
     .addTo(this.map);

@@ -3,6 +3,7 @@ import commonjs from 'rollup-plugin-commonjs';
 import babel from 'rollup-plugin-babel';
 import scss from 'rollup-plugin-scss'
 import copyTo from 'rollup-plugin-copy-assets-to';
+import globals from 'rollup-plugin-node-globals';
 
 export default {
   input: ['src/dashboard.js'],
@@ -24,6 +25,7 @@ export default {
       browser: true,
     }),
     commonjs(),
+    globals(),
     babel({ exclude: 'node_modules/**' }),
     scss({
       output: 'dist/dashboard.css',

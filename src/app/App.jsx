@@ -6,27 +6,36 @@ import { Map } from '../map/Map.js';
 import BaseInfo from './BaseInfo.jsx';
 import Counter from './Counter.jsx';
 
+import { getEventsForScheme } from '../resources/events';
+
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected: null
+      selected: null,
+      events: [],
     };
     this.map = new Map(this);
   }
 
-  setSelected(selected) {
-    this.setState({ selected });
+  async setSelected(selected) {
+    const events = await getEventsForScheme(selected);
+    this.setState({ selected, events });
+  }
+
+  clearSelected() {
+    this.setState({ selected: null, events: []});
   }
 
   render() {
     const schemeId = this.state.selected;
+    const events = this.state.events;
     return (
       <div className='container'>
         <h1>Housing Monitoring Dashboard</h1>
         <div id='map'></div>
         <div className='row'>
-          <div className='col-6'><BaseInfo schemeId={schemeId} /></div>
+          <div className='col-6'><BaseInfo schemeId={schemeId} events={events}/></div>
           <div className='col-6'><Counter schemeId={schemeId} /></div>
         </div>
       </div>

@@ -5,11 +5,8 @@ export default function BaseInfo(props) {
   if (props.schemeId) {
     title = <>Scheme Info { props.schemeId }</>;
     schemeData = <>
-      <dl>
-        <dt>Scheme Id</dt>
-        <dd>{ props.schemeId }</dd>
-      </dl>
-      <div>Stuff in here</div>
+      <p>id: { props.schemeId }</p>
+      <p>{ props.events.length } events registered</p>
     </>;
   } else {
     title = 

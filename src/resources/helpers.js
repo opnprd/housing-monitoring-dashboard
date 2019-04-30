@@ -1,4 +1,4 @@
-export function checkStatus(response) {
+function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
     return Promise.resolve(response)
   } else {
@@ -6,6 +6,12 @@ export function checkStatus(response) {
   }
 }
 
-export function parseJson(response) {
+function parseJson(response) {
   return response.json()
+}
+
+export async function getResource(query) {
+  return fetch(query)
+    .then(checkStatus)
+    .then(parseJson);
 }

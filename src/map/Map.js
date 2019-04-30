@@ -16,7 +16,6 @@ export class Map {
 
   setSelected(schemeId) {
     this.app.setSelected(schemeId);
-    console.log(this.app.state);
   }
 
   async addSchemesLayer() {

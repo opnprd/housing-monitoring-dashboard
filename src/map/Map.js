@@ -8,7 +8,7 @@ export class Map {
   }
 
   init() {
-    this.map = L.map('map').setView([53.80, -1.55], 15);
+    this.map = L.map('map').setView([53.80, -1.55], 14);
     L.tileLayer.provider('Stamen.TonerLite').addTo(this.map);
     this.addSchemesLayer();
     this.map.on('moveend', () => this.addSchemesLayer());

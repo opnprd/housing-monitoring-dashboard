@@ -1,47 +1,42 @@
+import { Count } from './DisplayCount.jsx';
 import { processEvents } from './counter';
 
-function DisplayCount(props) {
-  const count = props.count;
-  if (count === null) return '?';
-  if (Array.isArray(count)) return <>{ count[0] } to { count[1] }</>;
-  return count;
+function List(props) {
+  const { array } = props;
+  return <ul>
+    { array.map(x => <li>{x}</li>)}
+  </ul>
+}
+
+function Explanation(props) {
+  const { schemeId, events } = props;
+  return <div className='explanation'>
+    <p>
+      Property count for { schemeId }.
+    </p>
+    <p>
+      The count used { events.valid.length } separate events.
+      { events.skipped > 0 && <> ({ events.skipped } events were excluded.)</> }
+    </p>
+    <p>
+      The raw values were { JSON.stringify(events.valid) }.
+    </p>
+    <p>
+      The input data was:
+    </p>
+      <List array={events.summary} />
+  </div>;
 }
 
 export default function Counter(props) {
   const schemeId = props.schemeId;
   const events = processEvents(props.events);
 
-  const skipped = <>({ events.skipped } events were excluded.)</>
-
-  let schemeDetails;
-
-  if (schemeId) {
-    schemeDetails = (<>
-      <div className='count'>
-        <DisplayCount count={ events.properties } />
-      </div>
-      <div className='explanation'>
-        <p>Count for scheme ID { schemeId }</p>
-        <p>
-          This came from { events.valid.length } separate events.
-          { events.skipped > 0 ? skipped : '' }
-        </p>
-        <p>
-          The raw values were { JSON.stringify(events.valid) }.
-        </p>
-        <p>
-          The input data was: { JSON.stringify(events.summary) }.
-        </p>
-      </div>
-      </>);
-  } else {
-    schemeDetails = <div>No scheme seleted!</div>;
-  }
-
   return (
     <>
       <h2>Property Counter</h2>
-      { schemeDetails }
+      <Count count={ events.properties } />
+      <Explanation events={ events } schemeId={ schemeId }/>
     </>
   );
 }

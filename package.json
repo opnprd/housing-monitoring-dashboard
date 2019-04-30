@@ -1,0 +1,30 @@
+{
+  "name": "housing-monitor-dashboard",
+  "version": "0.1.0",
+  "description": "Dashboard for the housing monitor",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rollup --config",
+    "watch": "rollup --config --watch",
+    "start": "serve dist"
+  },
+  "author": "Giles Dring <giles.dring@odileeds.org>",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.4.4",
+    "rollup": "^1.10.1",
+    "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-commonjs": "^9.3.4",
+    "rollup-plugin-copy-assets-to": "^1.0.0",
+    "rollup-plugin-node-resolve": "^4.2.3",
+    "rollup-plugin-scss": "^1.0.1",
+    "serve": "^11.0.0"
+  },
+  "dependencies": {
+    "leaflet": "1.4.0",
+    "leaflet-providers": "1.6.0",
+    "react": "16.8.6",
+    "react-dom": "16.8.6"
+  }
+}

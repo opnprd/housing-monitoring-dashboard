@@ -30,14 +30,20 @@ class App extends Component {
   render() {
     const schemeId = this.state.selected;
     const events = this.state.events;
+
+    let schemeDisplay = <div className='col-12'>Select a scheme on the map above.</div>
+    if (schemeId) {
+      schemeDisplay = <>
+        <div className='col-6'><BaseInfo schemeId={schemeId} events={events}/></div>
+        <div className='col-6'><PropertyCount schemeId={schemeId} events={events}/></div>
+      </>;
+    }
+
     return (
       <div className='container'>
         <h1>Housing Monitoring Dashboard</h1>
         <div id='map'></div>
-        <div className='row'>
-          <div className='col-6'><BaseInfo schemeId={schemeId} events={events}/></div>
-          <div className='col-6'><PropertyCount schemeId={schemeId} events={events}/></div>
-        </div>
+        <div className='row'>{ schemeDisplay }</div>
       </div>
     );
   }

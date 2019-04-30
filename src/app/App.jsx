@@ -4,7 +4,7 @@ import { render } from 'react-dom';
 import { Map } from '../map/Map.js';
 
 import BaseInfo from './BaseInfo.jsx';
-import PropertyCount from '../inferencer/propertyCount/View.jsx';
+import PropertyCount from '../inferencers/propertyCount/View.jsx';
 
 import { getEventsForScheme } from '../resources/events';
 

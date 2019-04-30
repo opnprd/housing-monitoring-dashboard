@@ -4,7 +4,7 @@ import { render } from 'react-dom';
 import { Map } from '../map/Map.js';
 
 import BaseInfo from './BaseInfo.jsx';
-import Counter from './Counter.jsx';
+import PropertyCount from '../inferencer/propertyCount/View.jsx';
 
 import { getEventsForScheme } from '../resources/events';
 
@@ -36,7 +36,7 @@ class App extends Component {
         <div id='map'></div>
         <div className='row'>
           <div className='col-6'><BaseInfo schemeId={schemeId} events={events}/></div>
-          <div className='col-6'><Counter schemeId={schemeId} /></div>
+          <div className='col-6'><PropertyCount schemeId={schemeId} events={events}/></div>
         </div>
       </div>
     );

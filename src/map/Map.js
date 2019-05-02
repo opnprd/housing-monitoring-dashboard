@@ -5,6 +5,7 @@ import { boundsToPolygon } from './helpers';
 export class Map {
   constructor(app) {
     this.app = app;
+    this.selectedScheme = null;
   }
 
   init() {
@@ -14,10 +15,15 @@ export class Map {
     this.map.on('moveend', () => this.addSchemesLayer());
   }
 
-  setSelected(schemeId) {
-    this.app.setSelected(schemeId);
-  }
+  setSchemeStyle(feature) {
+    console.log(feature.properties.schemeId === this.selectedScheme);
+    const color = (feature.properties.schemeId === this.selectedScheme) ? "hsl(120, 61%, 50%)" : "hsl(120, 100%, 25%)";
 
+    return {
+      color,
+    };
+  }
+  
   async addSchemesLayer() {
     const geoJsonSearch = boundsToPolygon(this.map.getBounds());
   
@@ -27,13 +33,14 @@ export class Map {
     
     this.removeSchemesLayer();
     this.schemesLayer = L.geoJSON(schemeGeoJson, {
-      style: function () {
-        return { color: 'green' };
-      },
+      style: (feature) => this.setSchemeStyle(feature),
       onEachFeature: (feature, layer) => {
         layer.on('click', () => {
-          this.map.fitBounds(layer.getBounds(), {});
-          this.setSelected(feature.properties.schemeId);
+          console.log(parent);
+          this.selectedScheme = feature.properties.schemeId;
+          this.setSchemeStyle(feature);
+          this.map.panTo(layer.getCenter(), {});
+          this.app.setSelected(this.selectedScheme);
         });
       },
     })

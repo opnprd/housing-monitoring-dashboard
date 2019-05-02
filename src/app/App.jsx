@@ -35,9 +35,11 @@ class App extends Component {
     let schemeDisplay = <div className='col-12'>Select a scheme on the map above.</div>
     if (schemeId) {
       schemeDisplay = <>
-        <div className='col-6'><BaseInfo schemeId={schemeId} events={events}/></div>
-        <div className='col-6'><PropertyCount schemeId={schemeId} events={events}/></div>
-        <div className='col-12'><EventStream events={events} /></div>
+        <div className='col-6'><EventStream events={events} /></div>
+        <div className='col-6'>
+          <PropertyCount schemeId={schemeId} events={events}/>
+          <BaseInfo schemeId={schemeId} events={events}/>
+        </div>
       </>;
     }
 

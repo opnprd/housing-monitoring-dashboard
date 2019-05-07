@@ -1,12 +1,18 @@
-import { validEndings } from './words';
+import { validEndings, dropAdjectives } from './words';
 import { checkForNumber, calculateProperties } from './helpers';
 
 // Calculate the units for an individual site
 export function calculateUnits(description) {
 	let units = null;
 	
+	let simplifiedDescription = description;
+
+	for (let adjective of dropAdjectives ) {
+		simplifiedDescription = simplifiedDescription.replace(adjective, '');
+	}
+
 	// Split into individual words
-	const textSplit = description.split(/ /g);
+	const textSplit = simplifiedDescription.split(/\s+/g);
 	
 	for (let i = 0; i < textSplit.length; i++) {
 		const wordCheck = checkForNumber(textSplit[i]);

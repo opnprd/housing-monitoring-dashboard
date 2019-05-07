@@ -37,6 +37,10 @@ export const validEndings = [
   "homes",
 ];
 
+export const dropAdjectives = [
+	'self contained',
+];
+
 // Words to numbers
 export const Small = {
 	'zero': 0,

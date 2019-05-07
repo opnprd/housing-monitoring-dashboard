@@ -6,12 +6,8 @@ export default function EventStream(props) {
   return (
     <>
       <h2>Event stream</h2>
-      <div className='col-6'>
-        <TimedEvents events={events} />
-      </div>
-      <div className='col-6'>
-        <UndatedEvents events={events} />
-      </div>
+      <TimedEvents events={events} />
+      <UndatedEvents events={events} />
     </>
   );
 }

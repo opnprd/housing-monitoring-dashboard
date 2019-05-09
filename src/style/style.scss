@@ -18,5 +18,10 @@ main {
   height: 500px;
 }
 
+.centred {
+  text-align: center;
+}
+
 @import 'simple-grid';
 @import 'propertyCount';
+@import 'graph';

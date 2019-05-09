@@ -1,0 +1,17 @@
+$hue: 260;
+svg {
+  text {
+    font-size: 0.6em;
+  }
+  
+  rect {
+    &.band_A { fill: hsl($hue, 50, 20); }
+    &.band_B { fill: hsl($hue, 50, 30); }
+    &.band_C { fill: hsl($hue, 50, 40); }
+    &.band_D { fill: hsl($hue, 50, 50); }
+    &.band_E { fill: hsl($hue, 50, 60); }
+    &.band_F { fill: hsl($hue, 50, 70); }
+    &.band_G { fill: hsl($hue, 50, 80); }
+    &.band_H { fill: hsl($hue, 50, 90); }
+  }
+}

@@ -1,3 +1,4 @@
+import path from 'path';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import babel from 'rollup-plugin-babel';
@@ -51,7 +52,18 @@ export default [
       }),
     ],
     external: ['react', 'react-dom', 'leaflet-providers'],
-  }, {
+  },
+  {
+    onwarn: function (warning, warn) {
+      const ignoreCircular = [
+        'd3-interpolate',
+        'recharts'
+      ].filter(mod => !warning.importer.indexOf(path.normalize(`node_modules/${mod}/`)))
+        .length > 0;
+      if ( warning.code === 'CIRCULAR_DEPENDENCY' && ignoreCircular ) return;
+
+      warn(warning);
+    },
     input: 'src/report.js',
     output: {
       name: 'Report',

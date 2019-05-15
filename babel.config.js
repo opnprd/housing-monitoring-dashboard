@@ -10,6 +10,7 @@ module.exports = function (api) {
 
   const plugins = [
     '@babel/transform-react-jsx',
+    'recharts',
   ];
 
   return {

@@ -10,8 +10,8 @@ function parseJson(response) {
   return response.json()
 }
 
-export async function getResource(query) {
-  return fetch(query)
+export async function getResource(query, options = {}) {
+  return fetch(query, options)
     .then(checkStatus)
     .then(parseJson);
 }

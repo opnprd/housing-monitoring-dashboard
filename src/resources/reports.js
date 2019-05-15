@@ -35,16 +35,21 @@ export default async function getAndFormatSchemesReport() {
     return acc;
   }, reportTemplate);
 
+  const flattenize = ([k, v]) => ({
+    period: moment(k, 'YYYY-MM').format('MMM YY'),
+    planningConsents: v.planningConsents,
+    occupations: v.occupations,
+  });
+
+  const makeCumulative = (curr, idx, data) => ({
+    period: curr.period,
+    planningConsents: data.slice(0, idx).reduce((a, c) => a + c.planningConsents, 0),
+    occupations: data.slice(0, idx).reduce((a, c) => a + c.occupations, 0),
+  });
+
   const report = Object.entries(reportData)
-    .map(([k, v]) => ({
-      period: moment(k, 'YYYY-MM').format('MMM YY'),
-      planningConsents: v.planningConsents,
-      occupations: v.occupations,
-    }))
-    .map((curr, idx, data) => ({
-      period: curr.period,
-      planningConsents: data.slice(0, idx).reduce((a, c) => a + c.planningConsents, 0),
-      occupations: data.slice(0, idx).reduce((a, c) => a + c.occupations, 0),
-    }));
-  return report;
+    .map(flattenize)
+    .map(makeCumulative);
+
+    return report;
 }

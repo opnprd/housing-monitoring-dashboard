@@ -23,8 +23,8 @@ export default function Summary(props) {
         <XAxis dataKey='period'><Label value='Period'/></XAxis>
         <YAxis yAxisId='left'><Label value='Properties Planned' angle={-90} /></YAxis>
         <YAxis yAxisId='right' orientation='right'><Label value='Properties Occupied' angle={90}/></YAxis>
-        <Area name='Planned' legendType='rect' dataKey='planningConsents' yAxisId='left' fill='hsla(120, 50%, 50%, 0.5)' stroke='hsla(120, 50%, 50%, 0.9)'/>
-        <Line name='Completed' type='step' legendType='line' dot={false} dataKey='occupations' yAxisId='right'/>
+        <Area name='Completed' dataKey='occupations' yAxisId='left' legendType='rect' fill='hsla(120, 50%, 50%, 0.5)' stroke='hsla(120, 50%, 50%, 0.9)'/>
+        <Line name='Planned' dataKey='planningConsents' yAxisId='right' legendType='line' dot={false} />
       </ComposedChart>
     </ResponsiveContainer>
   )

@@ -36,7 +36,7 @@ export default async function getAndFormatSchemesReport() {
   }, reportTemplate);
 
   const flattenize = ([k, v]) => ({
-    period: moment(k, 'YYYY-MM').format('MMM YY'),
+    period: moment(k, 'YYYY').format('YYYY'),
     planningConsents: v.planningConsents,
     occupations: v.occupations,
   });
@@ -49,7 +49,7 @@ export default async function getAndFormatSchemesReport() {
 
   const report = Object.entries(reportData)
     .map(flattenize)
-    .map(makeCumulative);
+    // .map(makeCumulative);
 
     return report;
 }

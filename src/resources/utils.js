@@ -3,10 +3,10 @@ import momentRange from 'moment-range'
 
 const moment = momentRange.extendMoment(Moment);
 
-const period = 'month';
+const period = 'year';
 
 export function bucketize(date) {
-  return moment(date).endOf(period).format('YYYY-MM');
+  return moment(date).endOf(period).format('YYYY');
 }
 
 export function counter(data) {
